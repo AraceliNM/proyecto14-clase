@@ -122,6 +122,9 @@
             </ul>
 
             <p class="text-trueGray-500 px-6 my-2">USUARIOS</p>
+
+            @livewire('cart-movil')
+
             @auth
                 <a href="{{ route('profile.show') }}" class="py-2 px-4 text-sm flex items-center text-trueGray-500 hover:bg-orange-500
                 hover:text-white">
