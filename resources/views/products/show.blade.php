@@ -20,6 +20,7 @@
                     <a class="text-orange-500 hover:text-orange-600 underline" href="">39 reseñas</a>
                 </div>
                 <p class="text-2xl font-semibold text-trueGray-700 my-4">{{ $product->price }} &euro;</p>
+
                 <div class="bg-white rounded-lg shadow-lg mb-6">
                     <div class="flex items-center p-4">
                         <span class="flex items-center justify-center h-10 w-10 rounded-full bg-lime-600">
@@ -31,6 +32,14 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($product->subcategory->size)
+                    @livewire('add-cart-item-size', ['product' => $product])
+                @elseif($product->subcategory->color)
+                    @livewire('add-cart-item-color', ['product' => $product])
+                @else
+                    @livewire('add-cart-item', ['product' => $product])
+                @endif
             </div>
         </div>
     </div>
