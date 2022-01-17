@@ -1,3 +1,10 @@
 <div>
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    <p class="text-xl text-gray-700">Color:</p>
+
+    <select class="form-control w-full">
+        <option value="" selected disabled>Seleccionar un color</option>
+        @foreach ($colors as $color)
+            <option value="{{$color->id}}">{{ $color->name }}</option>
+        @endforeach
+    </select>
 </div>
