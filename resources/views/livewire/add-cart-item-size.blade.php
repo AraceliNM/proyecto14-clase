@@ -14,9 +14,9 @@
 
         <select class="form-control w-full">
             <option value="" selected disabled>Seleccione un color</option>
-            
+
             @foreach ($colors as $color)
-                <option value="{{$color->id}}">{{$color->name}}</option>
+                <option value="{{$color->id}}">{{ __(ucfirst($color->name)) }}</option>
             @endforeach
         </select>
     </div>
