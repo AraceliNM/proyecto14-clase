@@ -25,3 +25,7 @@ Route::get('/', WelcomeController::class);
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('products/{product}', [ProductsController::class, 'show'])->name('products.show');
+
+Route::get('/deletecart', function () {
+    \Cart::destroy();
+});
