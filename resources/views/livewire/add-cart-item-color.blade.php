@@ -8,7 +8,16 @@
         @endforeach
     </select>
 
-    <div class="flex mt-4">
+    <p class="text-gray-700 my-4">
+        <span class="font-semibold text-lg">Stock disponible:</span>
+        @if($quantity)
+            {{ $quantity }}
+        @else
+            {{ $product->stock }}
+        @endif
+    </p>
+
+    <div class="flex">
         <div class="mr-4">
             <x-jet-secondary-button
                 disabled
