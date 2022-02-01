@@ -32,6 +32,7 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/create', CreateOrder::class)->name('orders.create');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
