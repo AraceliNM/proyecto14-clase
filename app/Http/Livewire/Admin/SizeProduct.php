@@ -24,7 +24,7 @@ class SizeProduct extends Component
         $size = Size::where('product_id', $this->product->id)
             ->where('name', $this->name)
             ->first();
-        
+
         if ($size) {
             $this->emit('errorSize', 'Esa talla ya existe');
         } else {
