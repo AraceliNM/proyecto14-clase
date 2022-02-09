@@ -28,11 +28,20 @@ class ColorSize extends Component
     {
         $this->validate();
 
-        $this->size->colors()->attach([
-            $this->color_id => [
-                'quantity' => $this->quantity,
-            ],
-        ]);
+        $pivot = TbPivot::where('color_id', $this->color_id)
+            ->where('size_id', $this->size->id)
+            ->first();
+
+        if ($pivot) {
+            $pivot->quantity += $this->quantity;
+            $pivot->save();
+        } else {
+            $this->size->colors()->attach([
+                $this->color_id => [
+                    'quantity' => $this->quantity,
+                ],
+            ]);
+        }
 
         $this->reset(['color_id', 'quantity']);
 
