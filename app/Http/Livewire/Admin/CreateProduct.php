@@ -52,6 +52,8 @@ class CreateProduct extends Component
             $product->quantity = $this->quantity;
         }
         $product->save();
+
+        return redirect()->route('admin.products.edit', $product);
     }
 
     public function updatedCategoryId($value)
