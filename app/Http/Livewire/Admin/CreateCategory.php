@@ -21,6 +21,16 @@ class CreateCategory extends Component
         'brands' => [],
     ];
     public $listeners = ['delete'];
+    public $category;
+    public $editForm = [
+        'open' => false,
+        'name' => null,
+        'slug' => null,
+        'icon' => null,
+        'image' => null,
+        'brands' => [],
+    ];
+    public $editImage;
 
     protected $rules = [
         'createForm.name' => 'required',
@@ -85,6 +95,18 @@ class CreateCategory extends Component
     {
         $category->delete();
         $this->getCategories();
+    }
+
+    public function edit(Category $category)
+    {
+        $this->category = $category;
+
+        $this->editForm['open'] = true;
+        $this->editForm['name'] = $category->name;
+        $this->editForm['slug'] = $category->slug;
+        $this->editForm['icon'] = $category->icon;
+        $this->editForm['image'] = $category->image;
+        $this->editForm['brands'] = $category->brands->pluck('id');
     }
 
     public function render()
