@@ -99,6 +99,8 @@ class CreateCategory extends Component
 
     public function edit(Category $category)
     {
+        $this->image = rand();
+        $this->reset(['editImage']);
         $this->category = $category;
 
         $this->editForm['open'] = true;
