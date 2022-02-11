@@ -27,8 +27,7 @@ class EditProduct extends Component
         'product.price' => 'required',
         'product.quantity' => 'numeric',
     ];
-
-    protected $listeners = ['refreshProduct'];
+    protected $listeners = ['refreshProduct', 'delete'];
 
     public function mount(Product $product)
     {
@@ -92,6 +91,19 @@ class EditProduct extends Component
     public function refreshProduct()
     {
         $this->product = $this->product->fresh();
+    }
+
+    public function delete(){
+        $images = $this->product->images;
+
+        foreach ($images as $image) {
+            Storage::disk('public')->delete($image->url);
+            $image->delete();
+        }
+
+        $this->product->delete();
+
+        return redirect()->route('admin.index');
     }
 
     public function render()
