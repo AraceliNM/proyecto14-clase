@@ -70,7 +70,7 @@
                     @foreach ($cities as $city)
                         <tr>
                             <td class="py-2">
-                                <a href="" class="uppercase underline hover:text-blue-600">
+                                <a href="{{ route('admin.cities.show', $city) }}" class="uppercase underline hover:text-blue-600">
                                     {{$city->name}}
                                 </a>
                             </td>
@@ -123,7 +123,7 @@
             </x-slot>
         </x-jet-dialog-modal>
     </div>
-    
+
     @push('scripts')
         <script>
             Livewire.on('deleteCity', cityId => {
