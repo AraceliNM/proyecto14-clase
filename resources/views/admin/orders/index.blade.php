@@ -1,7 +1,7 @@
-<x-app-layout>
+<x-admin-layout>
     <div class="container-menu py-12">
         <section class="grid grid-cols-5 gap-6 text-white">
-            <a href="{{ route('orders.index') . '?status=1' }}" class="bg-red-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('admin.orders.index') . '?status=1' }}" class="bg-red-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[1] }}
                 </p>
@@ -10,7 +10,7 @@
                     <i class="fas fa-business-time"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=2' }}" class="bg-gray-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('admin.orders.index') . '?status=2' }}" class="bg-gray-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[2] }}
                 </p>
@@ -19,7 +19,7 @@
                     <i class="fas fa-credit-card"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=3' }}" class="bg-yellow-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('admin.orders.index') . '?status=3' }}" class="bg-yellow-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[3] }}
                 </p>
@@ -28,7 +28,7 @@
                     <i class="fas fa-truck"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=4' }}" class="bg-pink-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('admin.orders.index') . '?status=4' }}" class="bg-pink-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[4] }}
                 </p>
@@ -37,7 +37,7 @@
                     <i class="fas fa-check-circle"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=5' }}" class="bg-green-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
+            <a href="{{ route('admin.orders.index') . '?status=5' }}" class="bg-green-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[5] }}
                 </p>
@@ -51,11 +51,10 @@
         @if($orders->count())
             <section class="bg-white shadow-lg rounded-lg px-12 py-8 mt-12 text-gray-700">
                 <h1 class="text-2xl mb-4">Pedidos recientes</h1>
-
                 <ul>
                     @foreach ($orders as $order)
                         <li>
-                            <a href="{{ route('orders.show', $order) }}" class="flex items-center py-2 px-4 hover:bg-gray-100">
+                            <a href="{{ route('admin.orders.show', $order) }}" class="flex items-center py-2 px-4 hover:bg-gray-100">
                                 <span class="w-12 text-center">
                                     @switch($order->status)
                                         @case(1)
@@ -87,20 +86,20 @@
                                     <span class="font-bold">
                                         @switch($order->status)
                                             @case(1)
-                                             Pendiente
-                                             @break
+                                            Pendiente
+                                            @break
                                             @case(2)
-                                             Recibido
-                                             @break
+                                            Recibido
+                                            @break
                                             @case(3)
-                                             Enviado
-                                             @break
+                                            Enviado
+                                            @break
                                             @case(4)
-                                             Entregado
-                                             @break
+                                            Entregado
+                                            @break
                                             @case(5)
-                                             Anulado
-                                             @break
+                                            Anulado
+                                            @break
                                             @default
                                         @endswitch
                                     </span>
@@ -128,4 +127,4 @@
             </div>
         @endif
     </div>
-</x-app-layout>
+</x-admin-layout>
