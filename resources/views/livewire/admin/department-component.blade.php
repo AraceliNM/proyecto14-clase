@@ -53,7 +53,7 @@
                 @foreach ($departments as $department)
                     <tr>
                         <td class="py-2">
-                            <a href="" class="uppercase underline hover:text-blue-600">
+                            <a href="{{route('admin.departments.show', $department)}}" class="uppercase underline hover:text-blue-600">
                                 {{$department->name}}
                             </a>
                         </td>
@@ -95,7 +95,7 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>
-    
+
     @push('scripts')
         <script>
             Livewire.on('deleteDepartment', departmentId => {
