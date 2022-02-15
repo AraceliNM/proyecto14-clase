@@ -60,7 +60,7 @@
                         <td class="py-2">
                             <div class="flex divide-x divide-gray-300 font-semibold">
                                 <a class="pr-2 hover:text-blue-600 cursor-pointer" wire:click="edit({{$department}})">Editar</a>
-                                <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="">Eliminar</a>
+                                <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="$emit('deleteDepartment', {{$department->id}})">Eliminar</a>
                             </div>
                         </td>
                     </tr>
