@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class SubcategoryFactory extends Factory
 {
@@ -13,8 +15,17 @@ class SubcategoryFactory extends Factory
      */
     public function definition()
     {
+        $category = Category::all()->random();
+        $color = collect([true, false])->random();
+        $size = collect([true, false])->random();
+        $name = $this->faker->sentence;
+
         return [
-            'image' => 'subcategories/' . $this->faker->image(storage_path('app/public/subcategories'), 640, 480, null, false)
+            'category_id' => $category->id,
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'color' => $color,
+            'size' => $color ? $size : false,
         ];
     }
 }
