@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class CategoryTest extends DuskTestCase
+class Semana1Test extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -24,7 +24,7 @@ class CategoryTest extends DuskTestCase
             $browser->visit('/')
                     ->click('@showCategory')
                     ->assertSee($category->name)
-                    ->screenshot('example-test');
+                    ->screenshot('showCategory-test');
         });
     }
 
@@ -43,7 +43,7 @@ class CategoryTest extends DuskTestCase
                 ->click('@showCategory')
                 ->mouseover('@category')
                 ->assertSee($subcategory->name)
-                ->screenshot('example2-test');
+                ->screenshot('ShowSubcategory-test');
         });
     }
 }
