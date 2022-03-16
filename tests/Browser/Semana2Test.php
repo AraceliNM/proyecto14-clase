@@ -122,6 +122,65 @@ class Semana2Test extends DuskTestCase
         });
     }
 
+    /** @test */
+    public function filter_products_by_subcategory()
+    {
+        $category = Category::factory()->create();
+
+        $product = $this->createProduct($category);
+        $product2 = $this->createProduct($category);
+
+        $this->browse(function (Browser $browser) use ($product, $product2, $category) {
+            $browser->visit('/categories/' . $category->slug)
+                ->assertSee('Subcategorías')
+                ->click('@filterSubcategory')
+                ->assertSee($product->name)
+                ->assertDontSee($product2->name)
+                ->screenshot('filterProductBySubcategory-test');
+        });
+    }
+
+    /** @test */
+    public function filter_products_by_brand()
+    {
+        $category = Category::factory()->create();
+
+        $product = $this->createProduct($category);
+        $product2 = $this->createProduct($category);
+
+        $this->browse(function (Browser $browser) use ($product, $product2, $category) {
+            $browser->visit('/categories/' . $category->slug)
+                ->assertSee('Marcas')
+                ->click('@filterBrand')
+                ->assertSee($product->name)
+                ->assertDontSee($product2->name)
+                ->screenshot('filterProductByBrand-test');
+        });
+    }
+
+    /** @test */
+    public function it_shows_the_product_details_page()
+    {
+        $category = Category::factory()->create();
+        $product = $this->createProduct($category);
+
+        $this->browse(function (Browser $browser) use ($product, $category) {
+            $browser->visit('/categories/' . $category->slug)
+                ->clickLink($product->name)
+                ->assertSee($product->name)
+                ->assertSee($product->description)
+                ->pause(500)
+                ->assertSee($product->price)
+                ->assertSee($product->quantity)
+                ->assertVisible('@imageProduct')
+                ->pause(500)
+                ->assertVisible('@buttonDecrement')
+                ->assertVisible('@buttonIncrement')
+                ->assertVisible('@buttonAddItem')
+                ->screenshot('showDetailProduct-test');
+        });
+    }
+
     public function createProduct($category, $status = Product::PUBLICADO, $color = false, $size = false) {
         $brand = Brand::factory()->create();
 

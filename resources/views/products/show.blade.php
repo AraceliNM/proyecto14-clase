@@ -6,7 +6,7 @@
                     <ul class="slides">
                         @foreach($product->images as $image)
                             <li data-thumb="{{ Storage::url($image->url) }}">
-                                <img src="{{ Storage::url($image->url) }}" />
+                                <img dusk="imageProduct" src="{{ Storage::url($image->url) }}" />
                             </li>
                         @endforeach
                     </ul>
