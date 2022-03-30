@@ -1,7 +1,7 @@
 <div x-data>
     <div>
         <p class="text-xl text-gray-700">Talla:</p>
-        <select wire:model="size_id" class="form-control w-full">
+        <select dusk="sizeSelect" wire:model="size_id" class="form-control w-full">
             <option value="" selected disabled>Seleccione una talla</option>
             @foreach ($sizes as $size)
                 <option value="{{$size->id}}">{{$size->name}}</option>
@@ -12,7 +12,7 @@
     <div class="mt-2">
         <p class="text-xl text-gray-700">Color:</p>
 
-        <select wire:model="color_id" class="form-control w-full">
+        <select dusk="colorSelect" wire:model="color_id" class="form-control w-full">
             <option value="" selected disabled>Seleccione un color</option>
 
             @foreach ($colors as $color)

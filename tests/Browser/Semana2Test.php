@@ -174,10 +174,164 @@ class Semana2Test extends DuskTestCase
                 ->assertSee($product->quantity)
                 ->assertVisible('@imageProduct')
                 ->pause(500)
-                ->assertVisible('@buttonDecrement')
-                ->assertVisible('@buttonIncrement')
-                ->assertVisible('@buttonAddItem')
+                ->assertVisible('@decrementButton')
+                ->assertVisible('@incrementButton')
+                ->assertVisible('@addItemButton')
                 ->screenshot('showDetailProduct-test');
+        });
+    }
+
+    /** @test */
+    public function the_limit_of_the_increment_button_is_the_max_quantity()
+    {
+        $category = Category::factory()->create();
+
+        $brand = Brand::factory()->create();
+
+        $category->brands()->attach($brand->id);
+
+        $subcategory = Subcategory::factory()->create([
+            'category_id' => $category->id,
+            'color' => false,
+            'size' => false
+        ]);
+
+        $product = Product::factory()->create([
+            'subcategory_id' => $subcategory->id,
+            'quantity' => 3,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($product) {
+            $browser->visit('/products/' . $product->slug)
+                ->assertButtonEnabled('@incrementButton')
+                ->press('@incrementButton')
+                ->pause(500)
+                ->press('@incrementButton')
+                ->pause(500)
+                ->assertButtonDisabled('@incrementButton')
+                ->screenshot('incrementButton-test');
+        });
+    }
+
+    /** @test */
+    public function the_limit_of_the_decrement_button_is_one()
+    {
+        $category = Category::factory()->create();
+
+        $brand = Brand::factory()->create();
+
+        $category->brands()->attach($brand->id);
+
+        $subcategory = Subcategory::factory()->create([
+            'category_id' => $category->id,
+            'color' => false,
+            'size' => false
+        ]);
+
+        $product = Product::factory()->create([
+            'subcategory_id' => $subcategory->id,
+            'quantity' => 3,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($product) {
+            $browser->visit('/products/' . $product->slug)
+                ->assertButtonDisabled('@decrementButton')
+                ->press('@incrementButton')
+                ->pause(500)
+                ->assertButtonEnabled('@decrementButton')
+                ->screenshot('decrementButton-test');
+        });
+    }
+
+    /** @test */
+    public function show_the_select_menu_of_size_or_color_depending_its_subcategory()
+    {
+        $category1 = Category::factory()->create();
+        $brand = Brand::factory()->create();
+        $category1->brands()->attach($brand->id);
+
+        $subcategory1 = Subcategory::factory()->create([
+            'category_id' => $category1->id,
+            'color' => false,
+            'size' => false
+        ]);
+
+        $product1 = Product::factory()->create([
+            'subcategory_id' => $subcategory1->id,
+            'quantity' => 3,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product1->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $category2 = Category::factory()->create();
+        $category2->brands()->attach($brand->id);
+
+        $subcategory2 = Subcategory::factory()->create([
+            'category_id' => $category2->id,
+            'color' => true,
+            'size' => false
+        ]);
+
+        $product2 = Product::factory()->create([
+            'subcategory_id' => $subcategory2->id,
+            'quantity' => 3,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product2->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $category3 = Category::factory()->create();
+        $category3->brands()->attach($brand->id);
+
+        $subcategory3 = Subcategory::factory()->create([
+            'category_id' => $category3->id,
+            'color' => true,
+            'size' => true
+        ]);
+
+        $product3 = Product::factory()->create([
+            'subcategory_id' => $subcategory3->id,
+            'quantity' => 3,
+        ]);
+
+        Image::factory()->create([
+            'imageable_id' => $product3->id,
+            'imageable_type' => Product::class,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($product1, $product2, $product3) {
+            $browser->visit('/products/' . $product1->slug)
+                ->pause(500)
+                ->assertNotPresent('@colorSelect')
+                ->assertNotPresent('@sizeSelect')
+                ->screenshot('productWithoutColorAndSize-test');
+            $browser->pause(500);
+            $browser->visit('/products/' . $product2->slug)
+                ->pause(500)
+                ->assertPresent('@colorSelect')
+                ->assertNotPresent('@sizeSelect')
+                ->screenshot('productWithColor-test');
+            $browser->pause(500);
+            $browser->visit('/products/' . $product3->slug)
+                ->pause(500)
+                ->assertPresent('@colorSelect')
+                ->assertPresent('@sizeSelect')
+                ->screenshot('productWithColorAndSize-test');
         });
     }
 
