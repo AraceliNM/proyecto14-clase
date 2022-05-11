@@ -80,7 +80,7 @@
                 </x-jet-dropdown>
             @endauth
         </div>
-        <div class="hidden md:block">
+        <div dusk="shoppingCart" class="hidden md:block">
             @livewire('dropdown-cart')
         </div>
     </div>
