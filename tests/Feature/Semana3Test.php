@@ -122,11 +122,16 @@ class Semana3Test extends TestCase
         $product = $this->createProductAll();
         $price = $product->price;
 
+        $product2 = $this->createProductAll(false, false, Product::PUBLICADO, 3);
+        $price2 = $product2->price;
+
         $this->actingAs($user);
 
         Livewire::test(AddCartItem::class, ['product' => $product])
-            ->call('addItem', $product)
-            ->assertStatus(200);
+            ->call('addItem', $product);
+
+        Livewire::test(AddCartItem::class, ['product' => $product2])
+            ->call('addItem', $product2);
 
         $content = Cart::content();
 
@@ -144,6 +149,9 @@ class Semana3Test extends TestCase
             ->assertStatus(200)
             ->assertSee($product->name)
             ->assertSee($price)
-            ->assertSee($product->quantity);
+            ->assertSee($product->quantity)
+            ->assertSee($product2->name)
+            ->assertSee($price2)
+            ->assertSee($product2->quantity);
     }
 }
