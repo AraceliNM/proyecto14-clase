@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Auth\Events\Login;
+use App\Listeners\MergeTheCart;
+use App\Http\Livewire\AddCartItem;
 use App\Http\Livewire\AddCartItemColor;
 use App\Http\Livewire\AddCartItemSize;
 use App\Http\Livewire\Search;
@@ -10,8 +14,10 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Subcategory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Dusk\Browser;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -106,5 +112,38 @@ class Semana3Test extends TestCase
             ->set('search', '')
             ->assertDontSee($product->name)
             ->assertDontSee($product2->name);
+    }
+
+    /** @test EJERCICIO 2 */
+    public function save_the_cart_to_the_database_when_the_user_logout()
+    {
+        $user = User::factory()->create();
+
+        $product = $this->createProductAll();
+        $price = $product->price;
+
+        $this->actingAs($user);
+
+        Livewire::test(AddCartItem::class, ['product' => $product])
+            ->call('addItem', $product)
+            ->assertStatus(200);
+
+        $content = Cart::content();
+
+        $this->post('/logout');
+
+        $this->assertDatabaseHas('shoppingcart', ['content' => serialize($content)]);
+
+        $cart = new MergeTheCart();
+        $userLogin = new Login('web', $user, true);
+        $this->actingAs($user);
+
+        $cart->handle($userLogin);
+
+        $this->get('/orders/create')
+            ->assertStatus(200)
+            ->assertSee($product->name)
+            ->assertSee($price)
+            ->assertSee($product->quantity);
     }
 }
