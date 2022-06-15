@@ -1,0 +1,17 @@
+Como he ido haciendo test en clase y luego en casa, no tengo commits de las primeras semanas en este proyecto.
+
+Aún así en el commit "Tarea Semana 3 - Test 1 a medias" encontrarás los test de las Semanas 1 y 2 hechos.
+
+Los siguientes commits son lo que he ido haciendo hasta terminar todos los test de la Semana 3:
+"Tareas mejoradas y Tarea Semana 3 - Hasta test 4"
+"Tarea Semana 3 - Test 7,8,9"
+"Tarea Semana 3 - Terminada"
+
+De la Semana 4 tengo hechos todos los test menos el 9:
+"Tarea Semana 4 - HastaTest 8"
+
+En este commit "Tarea Semana 3 - Refactorizada" he refactorizado la parte del dusk
+
+Por último de las Tareas Finales tengo hecho el Test 2:
+"Tareas Finales - Test 2 a medias"
+"Tareas Finales - Test 2 terminado"

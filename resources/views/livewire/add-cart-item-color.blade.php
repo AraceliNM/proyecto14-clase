@@ -4,11 +4,11 @@
     <select dusk="colorSelect" wire:model="color_id" class="form-control w-full">
         <option value="" selected disabled>Seleccionar un color</option>
         @foreach ($colors as $color)
-            <option value="{{$color->id}}">{{  __(ucfirst($color->name)) }}</option>
+            <option dusk="color" value="{{$color->id}}">{{  __(ucfirst($color->name)) }}</option>
         @endforeach
     </select>
 
-    <p class="text-gray-700 my-4">
+    <p dusk="colorStock" class="text-gray-700 my-4">
         <span class="font-semibold text-lg">Stock disponible:</span>
         @if($quantity)
             {{ $quantity }}
@@ -38,6 +38,7 @@
         </div>
         <div class="flex-1">
             <x-button
+                dusk="addCartItemColor"
                 x-bind:disabled="$wire.qty > $wire.quantity"
                 wire:click="addItem"
                 wire:loading.attr="disabled"

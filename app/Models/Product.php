@@ -41,9 +41,19 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    public function scopeFilterBy($query, QueryFilter $filters, array $data)
+    {
+        return $filters->applyto($query, $data);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function newEloquentBuilder($query)
+    {
+        return new ProductQuery($query);
     }
 
     public function getStockAttribute(){
