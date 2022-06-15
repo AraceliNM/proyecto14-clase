@@ -42,13 +42,13 @@
                 </x-button-link>
                 <div x-show="dropdownMenu" class="absolute left-1 py-2 mt-2 bg-white rounded-md shadow-xl">
                     <aside>
-                        <x-jet-input wire:model="categorySearch" type="text"
+                        <x-jet-input wire:model="category" type="text"
                                      placeholder="Busca por categoría" />
 
-                        <x-jet-input wire:model="subcategorySearch" type="text"
+                        <x-jet-input wire:model="subcategory" type="text"
                                      placeholder="Busca por subcategoría" />
 
-                        <x-jet-input wire:model="brandSearch" type="text"
+                        <x-jet-input wire:model="brand" type="text"
                                      placeholder="Busca por marca" />
 
                         <select wire:model="status" class="form-control w1/3">
@@ -57,13 +57,13 @@
                             <option value="1">No Publicado</option>
                         </select>
 
-                        <x-jet-input wire:model="priceSearch" type="text"
+                        <x-jet-input wire:model="price" type="text"
                                      placeholder="Busca por precio" />
 
-                        <input type="checkbox" wire:model="colorsSearch">
+                        <input type="checkbox" wire:model="color">
                         <label>Color</label>
 
-                        <input type="checkbox" wire:model="sizesSearch">
+                        <input type="checkbox" wire:model="size">
                         <label>Talla</label>
 
                         <x-jet-button class="mt-4 p-2" wire:click="clearFilters">
