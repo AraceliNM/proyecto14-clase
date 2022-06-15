@@ -133,6 +133,12 @@
                             </th>
                         @endif
 
+                        @if ($this->showColumn('Ventas'))
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                <a wire:click.prevent="sortBy()" role="button" href="#">Ventas</a>
+                            </th>
+                        @endif
+
                         @if($this->showColumn('Stock'))
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Stock
@@ -219,6 +225,12 @@
                         @if($this->showColumn('Fecha de Creación'))
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-500">{{ $product->created_at }}</div>
+                            </td>
+                        @endif
+
+                        @if ($this->showColumn('Ventas'))
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ $product->sales }}</div>
                             </td>
                         @endif
 

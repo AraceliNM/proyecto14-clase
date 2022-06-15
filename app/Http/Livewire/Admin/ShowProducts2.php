@@ -14,7 +14,7 @@ class ShowProducts2 extends Component
     public $pagination = 10;
     public $columns = [
         'Nombre', 'Categoría', 'Subcategoría', 'Marca', 'Fecha de Creación',
-        'Stock', 'Color', 'Talla', 'Estado', 'Precio', 'Editar'
+        'Stock', 'Color', 'Talla', 'Estado', 'Precio', 'Editar', 'Ventas'
     ];
     public $search, $category, $subcategory, $brand, $price, $color, $size;
     public $status = 2;

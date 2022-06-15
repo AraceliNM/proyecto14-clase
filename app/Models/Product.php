@@ -70,4 +70,24 @@ class Product extends Model
             return $this->quantity;
         }
     }
+
+    public function getSalesAttribute()
+    {
+        $id = $this->id;
+
+        $orders = Order::select('content')->get()->map(function ($order) {
+            return json_decode($order->content, true);
+        });
+
+        $products = $orders->collapse();
+
+        $counter = 0;
+
+        foreach ($products as $product) {
+            if ($product['id'] == $id) {
+                $counter = $counter + $product['qty'];
+            }
+        }
+        return $counter;
+    }
 }
